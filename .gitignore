@@ -8,3 +8,7 @@
 *.log
 .DS_Store
 Thumbs.db
+
+# Exclude password reset scripts
+/reset_admin.php
+/reset_user_passwords.php
