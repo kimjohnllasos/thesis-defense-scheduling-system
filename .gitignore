@@ -12,3 +12,6 @@ Thumbs.db
 # Exclude password reset scripts
 /reset_admin.php
 /reset_user_passwords.php
+
+# Exclude old database dump
+/thesis_defense_system (3).sql
