@@ -1,0 +1,811 @@
+:root {
+    --prompt-blue: #0B132B;
+    --dark-blue: #111A35;
+    --ai-green: #39FF88;
+    --white: #FFFFFF;
+    --border-color: #39405A;
+    --light-gray: #F4F6F8;
+    --text-gray: #6B7280;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--light-gray);
+    color: #222;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 22px 15px;
+    background: var(--prompt-blue);
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.logo h2 {
+    font-size: 32px;
+    color: var(--ai-green);
+    letter-spacing: 2px;
+}
+
+.logo p {
+    font-size: 11px;
+    line-height: 1.5;
+    margin-top: 5px;
+    color: #D9DCE5;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #D9DCE5;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.nav-link:hover {
+    background: var(--dark-blue);
+    color: white;
+}
+
+.nav-link.active {
+    background: var(--ai-green);
+    color: var(--prompt-blue);
+    font-weight: bold;
+}
+
+.logout {
+    margin-top: auto;
+    padding-top: 20px;
+}
+
+.logout button {
+    width: 100%;
+    padding: 12px;
+    color: white;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.logout button:hover {
+    background: var(--dark-blue);
+}
+
+.main-content {
+    margin-left: 250px;
+    min-height: 100vh;
+}
+
+.topbar {
+    min-height: 90px;
+    padding: 20px 30px;
+    background: white;
+    border-bottom: 1px solid #E5E7EB;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.topbar h1 {
+    color: var(--prompt-blue);
+    font-size: 25px;
+}
+
+.topbar p {
+    color: var(--text-gray);
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile-info {
+    text-align: right;
+}
+
+.profile-info strong,
+.profile-info small {
+    display: block;
+}
+
+.profile-info small {
+    color: var(--text-gray);
+    margin-top: 4px;
+}
+
+.profile-icon {
+    width: 42px;
+    height: 42px;
+    background: var(--ai-green);
+    color: var(--prompt-blue);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-weight: bold;
+}
+
+.content-section {
+    display: none;
+    padding: 30px;
+}
+
+.content-section.active-section {
+    display: block;
+}
+
+.statistics {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    background: white;
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+}
+
+.stat-card p {
+    color: var(--text-gray);
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.stat-card h2 {
+    color: var(--prompt-blue);
+    font-size: 28px;
+}
+
+.stat-card span {
+    position: absolute;
+    right: 18px;
+    top: 20px;
+    font-size: 23px;
+    color: #39FF88;
+    opacity: 1;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(250px, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 24px;
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    min-width: 0;
+}
+
+.card-header,
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.card h2,
+.section-heading h2 {
+    color: var(--prompt-blue);
+    font-size: 20px;
+}
+
+.section-heading {
+    margin-bottom: 20px;
+}
+
+.section-heading p {
+    margin-top: 7px;
+    color: var(--text-gray);
+    font-size: 14px;
+}
+
+.small-button,
+.primary-button,
+.approve-button,
+.reject-button {
+    border: none;
+    border-radius: 6px;
+    padding: 9px 12px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.small-button {
+    background: var(--prompt-blue);
+    color: white;
+}
+
+.primary-button {
+    background: var(--ai-green);
+    color: var(--prompt-blue);
+}
+
+.approve-button {
+    background: #DDFBE9;
+    color: #126B3A;
+}
+
+.reject-button {
+    background: #FEE2E2;
+    color: #991B1B;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.small-button:hover {
+    background: var(--dark-blue);
+    color: var(--white);
+}
+
+.primary-button:hover {
+    background: var(--ai-green);
+    color: var(--prompt-blue);
+}
+
+.approve-button:hover {
+    background: #B8F5D0;
+    color: #126B3A;
+}
+
+.reject-button:hover {
+    background: #FECACA;
+    color: #991B1B;
+}
+
+.quick-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.action-button {
+    text-align: left;
+    padding: 14px;
+    background: white;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--prompt-blue);
+    font-weight: bold;
+}
+
+.action-button:hover {
+    background: var(--prompt-blue);
+    color: white;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+th {
+    background: var(--prompt-blue);
+    color: white;
+    text-align: left;
+    padding: 13px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+td {
+    padding: 13px;
+    border-bottom: 1px solid #E5E7EB;
+    font-size: 13px;
+}
+
+tbody tr:hover {
+    background: #1E293B;
+}
+
+.status {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.pending {
+    background: #FFF4D6;
+    color: #9A6A00;
+}
+
+.approved,
+.available {
+    background: #DDFBE9;
+    color: #126B3A;
+}
+
+.unavailable {
+    background: #FEE2E2;
+    color: #991B1B;
+}
+
+.actions {
+    display: flex;
+    gap: 6px;
+}
+
+.table-search {
+    width: min(280px, 100%);
+    padding: 10px 12px;
+    border: 1px solid #D1D5DB;
+    border-radius: 7px;
+    font-size: 13px;
+}
+
+.note {
+    margin-top: 16px;
+    color: var(--text-gray);
+    font-size: 12px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.empty-state h3 {
+    color: var(--prompt-blue);
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    color: var(--text-gray);
+    line-height: 1.6;
+    max-width: 600px;
+    margin: auto;
+}
+
+.report-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.report-grid .card h3 {
+    color: var(--prompt-blue);
+    margin-bottom: 10px;
+}
+
+.report-grid .card p {
+    color: var(--text-gray);
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 18px;
+}
+
+@media (max-width: 1100px) {
+    .statistics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 750px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .main-content {
+        margin-left: 200px;
+    }
+
+    .topbar {
+        padding: 18px;
+        align-items: flex-start;
+    }
+
+    .topbar h1 {
+        font-size: 20px;
+    }
+
+    .topbar p {
+        max-width: 300px;
+        line-height: 1.5;
+    }
+
+    .content-section {
+        padding: 18px;
+    }
+
+    .profile-info {
+        display: none;
+    }
+
+    .report-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 520px) {
+    .sidebar {
+        width: 68px;
+        padding: 15px 8px;
+    }
+
+    .logo p,
+    .nav-link span,
+    .logout button {
+        display: none;
+    }
+
+    .logo h2 {
+        font-size: 22px;
+    }
+
+    .nav-link {
+        justify-content: center;
+        padding: 13px 5px;
+        font-size: 18px;
+    }
+
+    .main-content {
+        margin-left: 68px;
+    }
+
+    .statistics {
+        grid-template-columns: 1fr;
+    }
+
+    .topbar {
+        padding: 15px 12px;
+    }
+
+    .content-section {
+        padding: 12px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    .toolbar {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .table-search {
+        width: 100%;
+    }
+}
+
+
+/* Add User Form */
+.main-content .card form p {
+    margin-bottom: 18px;
+}
+
+.main-content .card form label {
+    display: inline-block;
+    margin-bottom: 6px;
+}
+
+.main-content .card form input,
+.main-content .card form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background: #fff;
+    color: #333;
+    font-size: 14px;
+}
+
+.main-content .card form button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #a3ff12;
+    color: #111;
+    font-weight: 600;
+}
+
+.main-content .card form a {
+    margin-left: 12px;
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Add User Form - Match Admin Dashboard */
+.main-content {
+    background: #0b1120;
+    color: #f1f5f9;
+}
+
+.main-content .card {
+    background: #151e30;
+    border: 1px solid #2b374b;
+    border-radius: 10px;
+    padding: 25px;
+    color: #f1f5f9;
+}
+
+.main-content .card h2 {
+    color: #a3ff12;
+}
+
+.main-content .card form label {
+    color: #f1f5f9;
+}
+
+.main-content .card form input,
+.main-content .card form select {
+    background: #0b1120;
+    color: #f1f5f9;
+    border: 1px solid #35445c;
+    border-radius: 6px;
+    padding: 12px;
+}
+
+.main-content .card form input:focus,
+.main-content .card form select:focus {
+    outline: 1px solid #a3ff12;
+    border-color: #a3ff12;
+}
+
+.main-content .card form button {
+    background: #a3ff12;
+    color: #0b1120;
+    border-radius: 6px;
+    padding: 11px 18px;
+    font-weight: bold;
+}
+
+.main-content .card form a {
+    color: #a3ff12;
+}
+
+/* Fix text visibility inside dark dashboard cards */
+.content-section .card h2,
+.content-section .card h3,
+.content-section .section-heading h2,
+.content-section .empty-state h3,
+.content-section .report-grid .card h3 {
+    color: #39FF88;
+}
+
+.content-section .section-heading p,
+.content-section .empty-state p,
+.content-section .report-grid .card p {
+    color: #D9DCE5;
+}
+
+/* Keep table rows dark when hovering */
+.content-section table tbody tr:hover,
+.content-section table tbody tr:hover td {
+    background-color: #1E293B !important;
+    color: #FFFFFF !important;
+}
+
+
+/* User Management action buttons */
+#users td:last-child {
+    white-space: nowrap;
+}
+
+#users td:last-child a.btn,
+#users td:last-child button.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2px;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 7px;
+    background-color: #39FF88;
+    color: #0B132B !important;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#users td:last-child a.btn:hover,
+#users td:last-child a.btn:focus,
+#users td:last-child button.btn:hover,
+#users td:last-child button.btn:focus {
+    background-color: #28D968 !important;
+    color: #0B132B !important;
+    text-decoration: none;
+    opacity: 1;
+}
+
+/* Defense Request action buttons */
+.content-section #defense-requests td button.approve-btn {
+    background-color: #39FF88 !important;
+    color: #0B132B !important;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.content-section #defense-requests td button.reject-btn {
+    background-color: #DC3545 !important;
+    color: #FFFFFF !important;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.content-section #defense-requests td button.approve-btn:hover {
+    background-color: #28D968 !important;
+    color: #0B132B !important;
+    opacity: 1;
+}
+.content-section #defense-requests td button.reject-btn:hover,
+.content-section #defense-requests td button.reject-btn:focus,
+.content-section #defense-requests td button.reject-btn:active {
+    background-color: #FF0000 !important;
+    color: #FFFFFF !important;
+    opacity: 1;
+}
+/* Improve administrator name and profile icon visibility */
+.topbar .profile {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+}
+
+.topbar .profile-info strong {
+    display: block;
+    color: #0B132B !important;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.topbar .profile-info small {
+    display: block;
+    color: #39405A !important;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.topbar .profile-icon {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #39FF88;
+    color: #0B132B;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Dark theme: Admin header and profile */
+.topbar {
+    background: #111A35;
+    border-bottom: 1px solid #39405A;
+    color: #FFFFFF;
+}
+
+.topbar h1 {
+    color: #FFFFFF;
+}
+
+.topbar p {
+    color: #AAB5C8;
+}
+
+.topbar .profile-info strong {
+    color: #FFFFFF !important;
+}
+
+.topbar .profile-info small {
+    color: #AAB5C8 !important;
+}
+
+.topbar .profile-icon {
+    background: #39FF88;
+    color: #0B132B;
+}
+
+/* Dark theme: Tables */
+table {
+    background: #111A35;
+    color: #FFFFFF;
+    border-color: #39405A;
+}
+
+thead th {
+    background: #0B132B;
+    color: #39FF88;
+    border-bottom: 1px solid #39405A;
+}
+
+tbody td {
+    background: #111A35;
+    color: #E8ECF4;
+    border-bottom: 1px solid #39405A;
+}
+
+tbody tr:hover td {
+    background: #1B2940;
+    color: #FFFFFF;
+}
+
+/* Keep table links readable */
+table a {
+    color: #39FF88;
+}
+
+table a:hover {
+    color: #FFFFFF;
+}
+
+/* Dark theme: Table containers */
+.table-container,
+.table-wrap {
+    background: #111A35;
+    border-color: #39405A;
+}

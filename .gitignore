@@ -1,0 +1,10 @@
+# Local configuration
+.env
+
+# Uploaded student documents
+/uploads/project_files/
+
+# Temporary files
+*.log
+.DS_Store
+Thumbs.db
